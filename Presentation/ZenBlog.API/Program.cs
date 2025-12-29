@@ -1,3 +1,5 @@
+using Scalar.AspNetCore;
+using ZenBlog.API.Endpoints.Registration;
 using ZenBlog.Application.Extensions;
 using ZenBlog.Persistence.Extensions;
 
@@ -13,6 +15,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.MapScalarApiReference();
 }
 
 app.UseHttpsRedirection();
@@ -20,5 +23,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapGroup("/api")
+    .RegisterEndpoints();
 
 app.Run();
